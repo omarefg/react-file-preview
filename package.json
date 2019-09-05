@@ -1,0 +1,51 @@
+{
+  "name": "react-file-preview",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "comma-separated-values": "^3.6.4",
+    "mammoth": "^1.4.8",
+    "react": "^16.9.0",
+    "react-data-grid": "^6.1.0",
+    "react-dom": "^16.9.0",
+    "react-pdf": "^4.1.0",
+    "react-scripts": "3.1.1",
+    "react-visibility-sensor": "^5.1.1",
+    "three": "^0.108.0",
+    "xlsx": "^0.15.1"
+  },
+  "scripts": {
+    "start": "PORT=54321 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-standard": "^4.0.1",
+    "node-sass": "^4.12.0"
+  }
+}
