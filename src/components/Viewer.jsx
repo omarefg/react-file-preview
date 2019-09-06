@@ -3,18 +3,18 @@ import PropTypes from 'prop-types'
 import '../styles/main.scss'
 
 import {
-    WithFetching,
-    CsvViewer,
-    DocxViewer,
-    VideoViewer,
-    XlsxViewer,
-    PDFViewer,
-    UnsupportedViewer,
-    PhotoViewerWrapper,
-    AudioViewer
-} from './'
+    FetchWrapper,
+    Csv,
+    Docx,
+    Video,
+    Xlsx,
+    Pdf,
+    Unssuported,
+    PhotoWrapper,
+    Audio
+} from '.'
 
-export class FileViewer extends Component {
+export class Viewer extends Component {
     state = {
         loading: true
     }
@@ -29,34 +29,34 @@ export class FileViewer extends Component {
     getDriver () {
         switch (this.props.fileType) {
         case 'csv': {
-            return WithFetching(CsvViewer, this.props)
+            return FetchWrapper(Csv, this.props)
         }
         case 'xlsx': {
             const newProps = Object.assign({}, this.props, { responseType: 'arraybuffer' })
-            return WithFetching(XlsxViewer, newProps)
+            return FetchWrapper(Xlsx, newProps)
         }
         case 'jpg':
         case 'jpeg':
         case 'gif':
         case 'bmp':
         case 'png': {
-            return PhotoViewerWrapper
+            return PhotoWrapper
         }
         case 'pdf': {
-            return PDFViewer
+            return Pdf
         }
         case 'docx': {
-            return DocxViewer
+            return Docx
         }
         case 'mp3': {
-            return AudioViewer
+            return Audio
         }
         case 'webm':
         case 'mp4': {
-            return VideoViewer
+            return Video
         }
         default: {
-            return UnsupportedViewer
+            return Unssuported
         }
         }
     }
@@ -73,7 +73,7 @@ export class FileViewer extends Component {
     }
 }
 
-FileViewer.propTypes = {
+Viewer.propTypes = {
     fileType: PropTypes.string.isRequired,
     filePath: PropTypes.string.isRequired,
     onError: PropTypes.func,
@@ -81,7 +81,7 @@ FileViewer.propTypes = {
     unsupportedComponent: PropTypes.element
 }
 
-FileViewer.defaultProps = {
+Viewer.defaultProps = {
     onError: () => null,
     errorComponent: null,
     unsupportedComponent: null

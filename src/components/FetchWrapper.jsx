@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Error, Loading } from './'
+import { Error, Loader } from './'
 
-export function WithFetching (WrappedComponent, props) {
+export function FetchWrapper (WrappedComponent, props) {
     return class extends Component {
         constructor (props) {
             super(props)
@@ -37,7 +37,7 @@ export function WithFetching (WrappedComponent, props) {
                 return <WrappedComponent data={this.state.data} {...this.props} />
             }
             return (
-                <Loading />
+                <Loader />
             )
         }
 

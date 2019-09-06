@@ -1,2 +1,4 @@
 # react-file-preview
-File viewer based on https://github.com/plangrid/react-file-viewer#readme
+
+
+Component to render and preview some kind of documents

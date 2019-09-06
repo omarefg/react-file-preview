@@ -1,8 +1,6 @@
-import React from 'react'
-import ReactDataGrid from 'react-data-grid'
 import CSV from 'comma-separated-values'
 
-const parse = data => {
+export const parseToCsv = data => {
     const rows = []
     const columns = []
 
@@ -27,18 +25,4 @@ const parse = data => {
     })
 
     return { rows, columns }
-}
-
-export const CsvViewer = props => {
-    const { rows, columns } = parse(props.data)
-
-    return (
-        <ReactDataGrid
-            columns={columns}
-            rowsCount={rows.length}
-            rowGetter={i => rows[i]}
-            minHeight={props.height || 650}
-            onGridSort={props.onGridSort}
-        />
-    )
 }

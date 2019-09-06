@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/unsupported.scss'
 
-export const UnsupportedViewer = props => (
+export const Unssuported = props => (
     <div className='pg-driver-view'>
         <div className='unsupported-message'>
             {props.unsupportedComponent
