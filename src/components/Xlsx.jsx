@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
-import { Csv } from '.'
-import { parseToXlsx } from '../utils'
+import React, { useState, useEffect } from 'react'
+import { Csv, Loader } from '.'
+import { parseToXlsx, getDataForSheet } from '../utils'
 
 export const Xlsx = props => {
-    const [state, setState] = useState(parseToXlsx(props.data))
-    const { sheets, names, curSheetIndex } = state
+    const [state, setState] = useState({ sheets: [], names: [], curSheetIndex: 0, isLoading: true })
+    const { sheets, names, curSheetIndex, isLoading } = state
+    const { filePath, responseType } = props
+
+    useEffect(() => {
+        const createSheet = async () => {
+            const data = await getDataForSheet(filePath, responseType)
+            setState(parseToXlsx(data))
+        }
+        createSheet()
+    }, [filePath, responseType])
 
     const renderSheetNames = names => {
         const sheets = names.map((name, index) => (
@@ -17,21 +26,27 @@ export const Xlsx = props => {
         ))
 
         return (
-            <div className='sheet-names'>
+            <div>
                 {sheets}
             </div>
         )
     }
 
     const renderSheetData = sheet => {
-        const csvProps = Object.assign({}, props, { data: sheet })
         return (
-            <Csv {...csvProps} />
+            <Csv
+                {...props}
+                data={sheet}
+            />
         )
     }
 
+    if (isLoading) {
+        return <Loader/>
+    }
+
     return (
-        <div className='spreadsheet-viewer'>
+        <div>
             {renderSheetNames(names)}
             {renderSheetData(sheets[curSheetIndex || 0])}
         </div>

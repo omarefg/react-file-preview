@@ -16,7 +16,10 @@ export const Docx = props => {
     }, [filePath])
 
     return (
-        <div ref={container}>
+        <div
+            className='document-container'
+            ref={container}
+        >
             <Loader />
         </div>)
 }

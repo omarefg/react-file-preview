@@ -1,10 +1,9 @@
 import React from 'react'
-import '../styles/error.scss'
 
 export const Error = props => (
-    <div className='error-message'>
+    <div>
         {props.errorComponent
-            ? <props.errorComponent {...props} />
-            : <p className='alert'>Unable to preview file</p>}
+            ? <props.errorComponent {...props}/>
+            : <p>Unable to preview file</p>}
     </div>
 )

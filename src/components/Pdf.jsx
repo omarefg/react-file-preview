@@ -48,16 +48,16 @@ export const Pdf = props => {
     }
 
     return (
-        <div className='pdf-viewer-container'>
-            <div className='pdf-viewer' ref={container} >
-                <div className='pdf-controlls-container'>
-                    <div className='view-control' onClick={increaseZoom} >
+        <div>
+            <div ref={container} >
+                <div>
+                    <div onClick={increaseZoom} >
                         <FontAwesomeIcon icon={faSearchPlus}/>
                     </div>
-                    <div className='view-control' onClick={resetZoom}>
+                    <div onClick={resetZoom}>
                         <FontAwesomeIcon icon={faUndoAlt}/>
                     </div>
-                    <div className='view-control' onClick={reduceZoom}>
+                    <div onClick={reduceZoom}>
                         <FontAwesomeIcon icon={faSearchMinus}/>
                     </div>
                 </div>

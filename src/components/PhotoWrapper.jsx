@@ -28,20 +28,18 @@ export const PhotoWrapper = props => {
         loader.load(filePath, onLoad, onProgress, onError)
     }, [filePath])
 
-    const getPhotoDriver = (width, height, fileType) => {
+    const getImageType = (width, height, fileType) => {
         if (fileType === 'jpg' && window.Math.abs((width / height) - 2) <= 0.01) {
             return Photo360
         }
         return Photo
     }
 
-    const PhotoDriver = getPhotoDriver(originalWidth, originalHeight, fileType)
+    const Image = getImageType(originalWidth, originalHeight, fileType)
 
-    if (!state.imageLoaded) {
-        return <Loader />
-    }
+    if (!state.imageLoaded) { return <Loader /> }
 
     return (
-        <PhotoDriver {...state} {...props} />
+        <Image {...state} {...props} />
     )
 }

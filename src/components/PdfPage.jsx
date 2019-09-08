@@ -15,7 +15,7 @@ export const PdfPage = props => {
     }, [zoom, index, pdf, containerWidth])
 
     return (
-        <div className='pdf-canvas'>
+        <div>
             <canvas
                 ref={canvas}
                 width='670'

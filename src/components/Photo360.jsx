@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
 import * as THREE from 'three'
-import '../styles/photo360.scss'
 
 export const Photo360 = props => {
     let savedX
@@ -18,14 +17,12 @@ export const Photo360 = props => {
         savedLatitude
     })
 
-    const { texture } = props
+    const { texture, originalWidth, originalHeight, height, width } = props
     const container = useRef(null)
 
     useEffect(() => {
-        const positionInfo = container.current && container.current.getBoundingClientRect()
-        const { height, width } = positionInfo
         const renderer = new THREE.WebGLRenderer()
-        renderer.setSize(width, height)
+        renderer.setSize(width || originalWidth, height || originalHeight)
         container.current && (container.current.innerHTML = '')
         container.current && container.current.appendChild(renderer.domElement)
 
@@ -78,11 +75,9 @@ export const Photo360 = props => {
         <div
             id='photo360'
             ref={container}
-            className='photo360'
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
             onMouseUp={onMouseUp}
-            style={{ height: '500px' }}
         />
     )
 }

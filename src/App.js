@@ -13,7 +13,7 @@ import mp4 from './samples/sample.mp4'
 export const App = () => {
     return (
         <div>
-            <h1>JPG</h1>
+            {/* <h1>JPG</h1>
             <Viewer
                 fileType='jpg'
                 filePath={jpg}
@@ -22,13 +22,15 @@ export const App = () => {
             <Viewer
                 fileType='jpg'
                 filePath={jpg360}
-            />
+                width={500}
+                height={500}
+            /> */}
             <h1>DOCX</h1>
             <Viewer
                 fileType='docx'
                 filePath={docx}
             />
-            <h1>PDF</h1>
+            {/* <h1>PDF</h1>
             <Viewer
                 fileType='pdf'
                 filePath={pdf}
@@ -54,7 +56,7 @@ export const App = () => {
             <Viewer
                 fileType='mp4'
                 filePath={mp4}
-            />
+            /> */}
         </div>
     )
 }

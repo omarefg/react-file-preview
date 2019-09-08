@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Loader } from '.'
-import '../styles/video.scss'
 
 export const Video = props => {
     const [isLoading, loadingHandler] = useState(true)
@@ -11,8 +10,8 @@ export const Video = props => {
     const visibility = isLoading ? 'hidden' : 'visible'
 
     return (
-        <div className='pg-driver-view'>
-            <div className='video-container'>
+        <div>
+            <div>
                 {isLoading && <Loader/>}
                 <video
                     style={{ visibility }}

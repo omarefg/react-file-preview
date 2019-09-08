@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Loader } from '.'
-import '../styles/video.scss'
 
 export const Audio = props => {
     const [loading, setLoader] = useState(true)
@@ -9,8 +8,8 @@ export const Audio = props => {
     const onCanPlay = () => setLoader(false)
 
     return (
-        <div className='pg-driver-view'>
-            <div className='video-container'>
+        <div>
+            <div>
                 {loading && <Loader/>}
                 <audio
                     style={{ visibility }}
