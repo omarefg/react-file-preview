@@ -1,22 +1,14 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { Loader } from './Loader'
-import { parseToDocx } from '../utils'
-import '../styles/docx.scss'
+import { useDocxData } from '../hooks'
+import styles from '../styles/docx.module.scss'
 
 export const Docx = ({ path }) => {
-    const container = useRef(null)
-
-    useEffect(() => {
-        const createDocx = async () => {
-            const html = await parseToDocx(path)
-            container.current && (container.current.innerHTML = html)
-        }
-        createDocx()
-    }, [path])
+    const container = useDocxData(path)
 
     return (
         <div
-            className='document-container'
+            className={styles['document-container']}
             ref={container}
         >
             <Loader/>

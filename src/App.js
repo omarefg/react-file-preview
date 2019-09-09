@@ -20,16 +20,16 @@ export const App = () => {
                 width='100%'
                 height='100%'
             /> */}
-            <h1>JPG 360</h1>
+            {/* <h1>JPG 360</h1>
             <Viewer
                 type='jpg'
                 path={jpg360}
-                width='100%'
-                height='500px'
+                width={500}
+                height={500}
                 style={{
                     border: '2px solid red',
                 }}
-            />
+            /> */}
             {/* <h1>DOCX</h1>
             <Viewer
                 type='docx'
@@ -40,18 +40,18 @@ export const App = () => {
                 type='pdf'
                 path={pdf}
             /> */}
-            {/* <h1>CSV</h1>
+            <h1>CSV</h1>
             <Viewer
                 type='csv'
                 path={csv}
                 onGridSort={() => null}
-            />  */}
-            {/* <h1>XLSX</h1>
+            />
+            <h1>XLSX</h1>
             <Viewer
                 type='xlsx'
                 path={xlsx}
                 onGridSort={() => null}
-            /> */}
+            />
             {/* <h1>MP3</h1>
             <Viewer
                 type='mp3'

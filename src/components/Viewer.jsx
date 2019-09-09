@@ -103,16 +103,18 @@ export const Viewer = props => {
     }
 }
 
+const { string, func, number, element, oneOfType, object } = PropTypes
+
 Viewer.propTypes = {
-    type: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
-    onError: PropTypes.func,
-    ErrorComponent: PropTypes.element,
-    UnssuportedComponent: PropTypes.element,
-    onGridSort: PropTypes.func,
-    height: PropTypes.string,
-    width: PropTypes.string,
-    style: PropTypes.object,
+    type: string.isRequired,
+    path: string.isRequired,
+    onError: func,
+    ErrorComponent: element,
+    UnssuportedComponent: element,
+    onGridSort: func,
+    height: oneOfType([string, number]),
+    width: oneOfType([string, number]),
+    style: object,
 }
 
 Viewer.defaultProps = {

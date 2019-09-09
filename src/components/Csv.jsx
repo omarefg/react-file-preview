@@ -1,26 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import ReactDataGrid from 'react-data-grid'
-import { parseToCsv, getSpreadSheetData } from '../utils'
+import { useCsvData } from '../hooks'
 import { Loader } from './Loader'
 
 export const Csv = props => {
-    const [state, setState] = useState({ rows: [], columns: [], isLoading: true })
-    const { path, responseType, height, onGridSort, data } = props
-    const { rows, columns } = state
+    const state = useCsvData(props)
+    const { height, onGridSort } = props
+    const { rows, columns, isLoading } = state
 
-    useEffect(() => {
-        const createSheet = async () => {
-            const sheetData = data || await getSpreadSheetData(path, responseType)
-            setState(parseToCsv(sheetData))
-        }
-        createSheet()
-    }, [path, responseType, data])
-
-    if (state.isLoading) {
-        return (
-            <Loader/>
-        )
-    }
+    if (isLoading) { return <Loader/> }
 
     return (
         <ReactDataGrid
