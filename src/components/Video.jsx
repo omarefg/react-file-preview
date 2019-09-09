@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
 
-export const Video = ({ type, path, ErrorComponent, onError }) => {
+export const Video = ({ type, path, ErrorComponent, onError, style }) => {
     const [isLoading, loadingHandler] = useState(true)
     const visibility = isLoading ? 'hidden' : 'visible'
 
@@ -21,7 +21,7 @@ export const Video = ({ type, path, ErrorComponent, onError }) => {
                     />
                 )}
                 <video
-                    style={{ visibility }}
+                    style={{ ...style, visibility }}
                     controls
                     type={`video/${type}`}
                     onCanPlay={onCanPlay}

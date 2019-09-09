@@ -1,12 +1,14 @@
 import React from 'react'
-import ReactDataGrid from 'react-data-grid'
+import ReactTable from 'react-table'
 import { useCsvData } from '../hooks'
 import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
 
+import 'react-table/react-table.css'
+
 export const Csv = props => {
     const state = useCsvData(props)
-    const { height, onGridSort, ErrorComponent, onError } = props
+    const { reactTableProps, ErrorComponent, onError } = props
     const { rows, columns, isLoading } = state
 
     if (isLoading) {
@@ -23,12 +25,11 @@ export const Csv = props => {
             ErrorComponent={ErrorComponent}
             onError={onError}
         >
-            <ReactDataGrid
+            <ReactTable
                 columns={columns}
-                rowsCount={rows.length}
-                rowGetter={i => rows[i]}
-                minHeight={height || 650}
-                onGridSort={onGridSort}
+                data={rows}
+                defaultPageSize={10}
+                {...reactTableProps}
             />
         </ErrorBoundary>
     )

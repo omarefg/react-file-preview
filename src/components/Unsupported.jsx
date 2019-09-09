@@ -1,16 +1,19 @@
 import React from 'react'
 import { ErrorBoundary } from './ErrorBoundary'
-import '../styles/unsupported.scss'
+import styles from '../styles/Unsupported.module.scss'
 
 export const Unssuported = props => {
-    const { UnssuportedComponent, ErrorComponent, type, onError } = props
+    const { UnssuportedComponent, ErrorComponent, type, onError, style } = props
 
     return (
         <ErrorBoundary
             ErrorComponent={ErrorComponent}
             onError={onError}
         >
-            <div>
+            <div
+                className={styles.unssuported}
+                style={style}
+            >
                 {UnssuportedComponent ?
                     <UnssuportedComponent/> : (
                         <p>

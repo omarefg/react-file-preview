@@ -14,6 +14,8 @@ export const usePdfPage = props => {
 
             canvas.current && (canvas.current.width = width)
             canvas.current && (canvas.current.height = height)
+            canvas.current && (canvas.current.style.display = 'block')
+            canvas.current && (canvas.current.style.margin = '0 auto')
         }
         fetchAndRenderPage()
     }, [zoom, index, pdf, containerWidth, canvas])

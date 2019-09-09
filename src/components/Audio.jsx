@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
 
-export const Audio = ({ path, ErrorComponent, onError }) => {
+import styles from '../styles/Audio.module.scss'
+
+export const Audio = ({ path, ErrorComponent, onError, style }) => {
     const [loading, setLoader] = useState(true)
     const visibility = loading ? 'hidden' : 'visible'
     const onCanPlay = () => setLoader(false)
@@ -20,7 +22,8 @@ export const Audio = ({ path, ErrorComponent, onError }) => {
                     />
                 )}
                 <audio
-                    style={{ visibility }}
+                    className={styles.audio}
+                    style={{ ...style, visibility }}
                     controls
                     onCanPlay={onCanPlay}
                     src={path}

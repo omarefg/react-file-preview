@@ -15,11 +15,13 @@ export const Viewer = props => {
         path,
         height,
         width,
-        onGridSort,
+        reactTableProps,
         UnssuportedComponent,
         ErrorComponent,
         style,
         onError,
+        pageSize,
+        showPdfMenu,
     } = props
 
     switch (type) {
@@ -28,9 +30,10 @@ export const Viewer = props => {
             <Csv
                 path={path}
                 height={height}
-                onGridSort={onGridSort}
+                reactTableProps={reactTableProps}
                 ErrorComponent={ErrorComponent}
                 onError={onError}
+                pageSize={pageSize}
             />
         )
     }
@@ -39,10 +42,11 @@ export const Viewer = props => {
             <Xlsx
                 path={path}
                 height={height}
-                onGridSort={onGridSort}
+                reactTableProps={reactTableProps}
                 responseType='arraybuffer'
                 ErrorComponent={ErrorComponent}
                 onError={onError}
+                pageSize={pageSize}
             />
         )
     }
@@ -69,6 +73,8 @@ export const Viewer = props => {
                 path={path}
                 ErrorComponent={ErrorComponent}
                 onError={onError}
+                showPdfMenu={showPdfMenu}
+                style={style}
             />
         )
     }
@@ -78,6 +84,7 @@ export const Viewer = props => {
                 path={path}
                 ErrorComponent={ErrorComponent}
                 onError={onError}
+                style={style}
             />
         )
     }
@@ -87,6 +94,7 @@ export const Viewer = props => {
                 path={path}
                 ErrorComponent={ErrorComponent}
                 onError={onError}
+                style={style}
             />
         )
     }
@@ -98,6 +106,7 @@ export const Viewer = props => {
                 type={type}
                 ErrorComponent={ErrorComponent}
                 onError={onError}
+                style={style}
             />
         )
     }
@@ -107,13 +116,14 @@ export const Viewer = props => {
                 UnssuportedComponent={UnssuportedComponent}
                 ErrorComponent={ErrorComponent}
                 onError={onError}
+                style={style}
             />
         )
     }
     }
 }
 
-const { string, func, number, element, oneOfType, object } = PropTypes
+const { string, func, number, element, oneOfType, object, bool } = PropTypes
 
 Viewer.propTypes = {
     type: string.isRequired,
@@ -121,18 +131,22 @@ Viewer.propTypes = {
     onError: func,
     ErrorComponent: element,
     UnssuportedComponent: element,
-    onGridSort: func,
     height: oneOfType([string, number]),
     width: oneOfType([string, number]),
     style: object,
+    reactTableProps: object,
+    showPdfMenu: bool,
 }
 
 Viewer.defaultProps = {
     onError: () => null,
     ErrorComponent: null,
     UnsupportedComponent: null,
-    onGridSort: () => null,
+    reactTableProps: {
+        onGridSort: () => null,
+    },
     height: null,
     width: null,
     style: null,
+    showPdfMenu: true,
 }

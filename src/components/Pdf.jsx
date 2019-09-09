@@ -1,15 +1,23 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearchPlus, faSearchMinus, faUndoAlt } from '@fortawesome/free-solid-svg-icons'
 import { usePdf } from '../hooks'
 import { PdfPage } from './PdfPage'
 import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
+import { PdfMenu } from './PdfMenu'
 import { INCREASE_PERCENTAGE } from '../utils'
 
-export const Pdf = ({ path, ErrorComponent, onError }) => {
-    const { state, container, reduceZoom, increaseZoom, resetZoom } = usePdf(path)
-    const { pdf, zoom, containerWidth, pages } = state
+export const Pdf = ({ path, ErrorComponent, onError, showPdfMenu, style }) => {
+    const {
+        state,
+        container,
+        reduceZoom,
+        increaseZoom,
+        resetZoom,
+        reducePage,
+        increasePage,
+        print,
+    } = usePdf(path)
+    const { pdf, zoom, containerWidth, page } = state
 
     return (
         <ErrorBoundary
@@ -17,46 +25,38 @@ export const Pdf = ({ path, ErrorComponent, onError }) => {
             onError={onError}
         >
             <div>
-                <div ref={container} >
-                    <div>
-                        <button
-                            onClick={increaseZoom}
-                            type='button'
-                        >
-                            <FontAwesomeIcon icon={faSearchPlus}/>
-                        </button>
-                        <button
-                            onClick={resetZoom}
-                            type='button'
-                        >
-                            <FontAwesomeIcon icon={faUndoAlt}/>
-                        </button>
-                        <button
-                            onClick={reduceZoom}
-                            type='button'
-                        >
-                            <FontAwesomeIcon icon={faSearchMinus}/>
-                        </button>
-                    </div>
+                <div
+                    ref={container}
+                    style={style}
+                >
+                    {showPdfMenu && (
+                        <PdfMenu
+                            reduceZoom={reduceZoom}
+                            increaseZoom={increaseZoom}
+                            resetZoom={resetZoom}
+                            reducePage={reducePage}
+                            increasePage={increasePage}
+                            print={print}
+                            page={page}
+                        />
+                    )}
                     {!pdf && (
                         <Loader
                             ErrorComponent={ErrorComponent}
                             onError={onError}
                         />
                     )}
-                    {pdf && pages.map(v => {
-                        return (
-                            <PdfPage
-                                index={v + 1}
-                                pdf={pdf}
-                                containerWidth={containerWidth}
-                                zoom={zoom * INCREASE_PERCENTAGE}
-                                key={v}
-                                ErrorComponent={ErrorComponent}
-                                onError={onError}
-                            />
-                        )
-                    })}
+                    {pdf && (
+                        <PdfPage
+                            index={page}
+                            pdf={pdf}
+                            containerWidth={containerWidth}
+                            zoom={zoom * INCREASE_PERCENTAGE}
+                            ErrorComponent={ErrorComponent}
+                            onError={onError}
+                        />
+
+                    )}
                 </div>
             </div>
         </ErrorBoundary>

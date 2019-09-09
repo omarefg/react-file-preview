@@ -2,7 +2,7 @@ import CSV from 'comma-separated-values'
 import XLSX from 'xlsx'
 import axios from 'axios'
 
-export const parseToCsv = data => {
+export const parseToCsv = (data, columnFields) => {
     const rows = []
     const columns = []
 
@@ -10,11 +10,9 @@ export const parseToCsv = data => {
         if (columns.length < 1) {
             array.forEach((cell, idx) => {
                 columns.push({
-                    key: `key-${idx}`,
-                    name: cell,
-                    resizable: true,
-                    sortable: true,
-                    filterable: true,
+                    accessor: `key-${idx}`,
+                    Header: cell,
+                    ...columnFields,
                 })
             })
         } else {

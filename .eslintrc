@@ -24,6 +24,7 @@
     "import"
   ],
   "rules": {
+    "react/jsx-props-no-spreading": [2, {"exceptions": ["ReactTable"]}],
     "no-useless-catch": 0,
     "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "never" }],
     "semi": [2, "never"],

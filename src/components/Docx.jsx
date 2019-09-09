@@ -2,9 +2,9 @@ import React from 'react'
 import { Loader } from './Loader'
 import { useDocxData } from '../hooks'
 import { ErrorBoundary } from './ErrorBoundary'
-import styles from '../styles/docx.module.scss'
+import { DocxStyles } from '../styles/Docx'
 
-export const Docx = ({ path, ErrorComponent, onError }) => {
+export const Docx = ({ path, ErrorComponent, onError, style }) => {
     const container = useDocxData(path)
 
     return (
@@ -12,15 +12,18 @@ export const Docx = ({ path, ErrorComponent, onError }) => {
             ErrorComponent={ErrorComponent}
             onError={onError}
         >
-            <div
-                className={styles['document-container']}
-                ref={container}
-            >
-                <Loader
-                    ErrorComponent={ErrorComponent}
-                    onError={onError}
-                />
-            </div>
+            <DocxStyles>
+                <div
+                    className='document-container'
+                    ref={container}
+                    style={style}
+                >
+                    <Loader
+                        ErrorComponent={ErrorComponent}
+                        onError={onError}
+                    />
+                </div>
+            </DocxStyles>
         </ErrorBoundary>
     )
 }
