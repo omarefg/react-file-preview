@@ -4,10 +4,17 @@ import { usePhotoWrapper } from '../hooks'
 
 export const PhotoWrapper = props => {
     const { state, Image } = usePhotoWrapper(props)
-    const { width, height, style } = props
+    const { width, height, style, ErrorComponent, onError } = props
     const { originalWidth, originalHeight, imageLoaded, texture } = state
 
-    if (!imageLoaded) { return <Loader/> }
+    if (!imageLoaded) {
+        return (
+            <Loader
+                ErrorComponent={ErrorComponent}
+                onError={onError}
+            />
+        )
+    }
 
     return (
         <Image
@@ -17,6 +24,8 @@ export const PhotoWrapper = props => {
             width={width}
             height={height}
             style={style}
+            ErrorComponent={ErrorComponent}
+            onError={onError}
         />
     )
 }

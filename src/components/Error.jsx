@@ -1,11 +1,12 @@
 import React from 'react'
+import styles from '../styles/Error.module.scss'
 
 export const Error = ({ ErrorComponent }) => {
     return (
-        <div>
+        <div className={styles.container}>
             {ErrorComponent ?
                 <ErrorComponent/> :
-                <p>Unable to preview file</p>}
+                <p className={styles.alert}>Unable to preview file</p>}
         </div>
     )
 }

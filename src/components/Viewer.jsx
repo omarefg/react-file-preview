@@ -19,6 +19,7 @@ export const Viewer = props => {
         UnssuportedComponent,
         ErrorComponent,
         style,
+        onError,
     } = props
 
     switch (type) {
@@ -28,6 +29,8 @@ export const Viewer = props => {
                 path={path}
                 height={height}
                 onGridSort={onGridSort}
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }
@@ -38,6 +41,8 @@ export const Viewer = props => {
                 height={height}
                 onGridSort={onGridSort}
                 responseType='arraybuffer'
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }
@@ -53,6 +58,8 @@ export const Viewer = props => {
                 width={width}
                 height={height}
                 style={style}
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }
@@ -60,6 +67,8 @@ export const Viewer = props => {
         return (
             <Pdf
                 path={path}
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }
@@ -67,6 +76,8 @@ export const Viewer = props => {
         return (
             <Docx
                 path={path}
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }
@@ -74,6 +85,8 @@ export const Viewer = props => {
         return (
             <Audio
                 path={path}
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }
@@ -83,20 +96,17 @@ export const Viewer = props => {
             <Video
                 path={path}
                 type={type}
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }
     default: {
-        if (ErrorComponent) {
-            return (
-                <ErrorComponent
-                    ErrorComponent={ErrorComponent}
-                />
-            )
-        }
         return (
             <Unssuported
                 UnssuportedComponent={UnssuportedComponent}
+                ErrorComponent={ErrorComponent}
+                onError={onError}
             />
         )
     }

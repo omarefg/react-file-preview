@@ -1,17 +1,26 @@
 import React from 'react'
 import { Loader } from './Loader'
 import { useDocxData } from '../hooks'
+import { ErrorBoundary } from './ErrorBoundary'
 import styles from '../styles/docx.module.scss'
 
-export const Docx = ({ path }) => {
+export const Docx = ({ path, ErrorComponent, onError }) => {
     const container = useDocxData(path)
 
     return (
-        <div
-            className={styles['document-container']}
-            ref={container}
+        <ErrorBoundary
+            ErrorComponent={ErrorComponent}
+            onError={onError}
         >
-            <Loader/>
-        </div>
+            <div
+                className={styles['document-container']}
+                ref={container}
+            >
+                <Loader
+                    ErrorComponent={ErrorComponent}
+                    onError={onError}
+                />
+            </div>
+        </ErrorBoundary>
     )
 }
