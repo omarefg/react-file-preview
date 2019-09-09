@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Loader } from '.'
+import { Loader } from './Loader'
 
-export const Audio = props => {
+export const Audio = ({ path }) => {
     const [loading, setLoader] = useState(true)
-    const { filePath } = props
     const visibility = loading ? 'hidden' : 'visible'
     const onCanPlay = () => setLoader(false)
 
@@ -15,7 +14,7 @@ export const Audio = props => {
                     style={{ visibility }}
                     controls
                     onCanPlay={onCanPlay}
-                    src={filePath}
+                    src={path}
                 >
                     Video playback is not supported by your browser.
                 </audio>

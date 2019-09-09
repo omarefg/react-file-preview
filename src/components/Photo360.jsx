@@ -14,10 +14,10 @@ export const Photo360 = props => {
         savedX,
         savedY,
         savedLongitude,
-        savedLatitude
+        savedLatitude,
     })
 
-    const { texture, originalWidth, originalHeight, height, width } = props
+    const { texture, originalWidth, originalHeight, height, width, style } = props
     const container = useRef(null)
 
     useEffect(() => {
@@ -52,7 +52,7 @@ export const Photo360 = props => {
             setState({
                 ...state,
                 longitude: newLongitude,
-                latitude: newLatitude
+                latitude: newLatitude,
             })
         }
     }
@@ -67,7 +67,7 @@ export const Photo360 = props => {
             savedLatitude: state.latitude,
             savedX: event.clientX,
             savedY: event.clientY,
-            manualControl: true
+            manualControl: true,
         })
     }
 
@@ -78,6 +78,8 @@ export const Photo360 = props => {
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
             onMouseUp={onMouseUp}
+            role='main'
+            style={style}
         />
     )
 }

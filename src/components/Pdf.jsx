@@ -2,46 +2,47 @@ import React, { useState, useRef, useEffect } from 'react'
 import { pdfjs } from 'react-pdf'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearchPlus, faSearchMinus, faUndoAlt } from '@fortawesome/free-solid-svg-icons'
-import { PdfPage, Loader } from '.'
+import { PdfPage } from './PdfPage'
+import { Loader } from './Loader'
 import { INCREASE_PERCENTAGE } from '../utils'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
-export const Pdf = props => {
-    const { filePath } = props
-    const container = useRef(null)
+export const Pdf = ({ path }) => {
     const [state, setState] = useState({ pdf: null, zoom: 0, containerWidth: 0 })
+    const { pdf, zoom, containerWidth } = state
+    const container = useRef(null)
+
     const setZoom = zoom => setState({ ...state, zoom })
+
+    const reduceZoom = () => zoom > 0 && setZoom(zoom - 1)
+
+    const increaseZoom = () => setZoom(zoom + 1)
+
+    const resetZoom = () => setZoom(0)
 
     useEffect(() => {
         const createPdf = async () => {
-            const loadingTask = pdfjs.getDocument(filePath)
+            const loadingTask = pdfjs.getDocument(path)
             const pdf = await loadingTask.promise.then()
             const containerWidth = container.current && container.current.offsetWidth
             setState(state => ({ ...state, pdf, containerWidth }))
         }
         createPdf()
-    }, [filePath])
-
-    const reduceZoom = () => state.zoom > 0 && setZoom(state.zoom - 1)
-
-    const increaseZoom = () => setZoom(state.zoom + 1)
-
-    const resetZoom = () => setZoom(0)
+    }, [path])
 
     const renderPages = () => {
-        const { pdf, containerWidth, zoom } = state
         if (!pdf) { return null }
-        const pages = Array.apply(null, { length: pdf.numPages })
+        const pages = [...Array(pdf.numPages).keys()]
 
-        return pages.map((_v, i) => {
+        return pages.map(v => {
             return (
                 <PdfPage
-                    index={i + 1}
+                    index={v + 1}
                     pdf={pdf}
                     containerWidth={containerWidth}
                     zoom={zoom * INCREASE_PERCENTAGE}
-                    key={i}
+                    key={v}
                 />
             )
         })
@@ -51,17 +52,26 @@ export const Pdf = props => {
         <div>
             <div ref={container} >
                 <div>
-                    <div onClick={increaseZoom} >
+                    <button
+                        onClick={increaseZoom}
+                        type='button'
+                    >
                         <FontAwesomeIcon icon={faSearchPlus}/>
-                    </div>
-                    <div onClick={resetZoom}>
+                    </button>
+                    <button
+                        onClick={resetZoom}
+                        type='button'
+                    >
                         <FontAwesomeIcon icon={faUndoAlt}/>
-                    </div>
-                    <div onClick={reduceZoom}>
+                    </button>
+                    <button
+                        onClick={reduceZoom}
+                        type='button'
+                    >
                         <FontAwesomeIcon icon={faSearchMinus}/>
-                    </div>
+                    </button>
                 </div>
-                {!state.pdf && <Loader />}
+                {!pdf && <Loader/>}
                 {renderPages()}
             </div>
         </div>

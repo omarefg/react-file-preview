@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { Loader } from '.'
+import { Loader } from './Loader'
 
-export const Video = props => {
+export const Video = ({ type, path }) => {
     const [isLoading, loadingHandler] = useState(true)
-    const { fileType, filePath } = props
+    const visibility = isLoading ? 'hidden' : 'visible'
 
     const onCanPlay = () => loadingHandler(false)
-
-    const visibility = isLoading ? 'hidden' : 'visible'
 
     return (
         <div>
@@ -16,9 +14,9 @@ export const Video = props => {
                 <video
                     style={{ visibility }}
                     controls
-                    type={`video/${fileType}`}
+                    type={`video/${type}`}
                     onCanPlay={onCanPlay}
-                    src={filePath}
+                    src={path}
                 >
                     Video playback is not supported by your browser.
                 </video>

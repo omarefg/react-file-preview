@@ -1,12 +1,21 @@
 import React from 'react'
 import '../styles/unsupported.scss'
 
-export const Unssuported = props => (
-    <div>
+export const Unssuported = props => {
+    const { UnssuportedComponent, type } = props
+
+    return (
         <div>
-            {props.unsupportedComponent
-                ? <props.unsupportedComponent {...props}/>
-                : <p><b>{`.${props.fileType}`}</b> is not supported.</p>}
+            <div>
+                {UnssuportedComponent ?
+                    <UnssuportedComponent/> :
+                    (
+                        <p>
+                            <b>{`.${type} `}</b>
+                            is not supported.
+                        </p>
+                    )}
+            </div>
         </div>
-    </div>
-)
+    )
+}

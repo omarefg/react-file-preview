@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import ReactDataGrid from 'react-data-grid'
-import { parseToCsv, getDataForSheet } from '../utils'
-import { Loader } from '../components'
+import { parseToCsv, getSpreadSheetData } from '../utils'
+import { Loader } from './Loader'
 
 export const Csv = props => {
     const [state, setState] = useState({ rows: [], columns: [], isLoading: true })
-    const { filePath, responseType, height, onGridSort, data } = props
+    const { path, responseType, height, onGridSort, data } = props
     const { rows, columns } = state
 
     useEffect(() => {
         const createSheet = async () => {
-            const sheetData = data || await getDataForSheet(filePath, responseType)
+            const sheetData = data || await getSpreadSheetData(path, responseType)
             setState(parseToCsv(sheetData))
         }
         createSheet()
-    }, [filePath, responseType, data])
+    }, [path, responseType, data])
 
     if (state.isLoading) {
         return (

@@ -1,25 +1,25 @@
 import React, { useEffect, useRef } from 'react'
-import { Loader } from '.'
+import { Loader } from './Loader'
 import { parseToDocx } from '../utils'
 import '../styles/docx.scss'
 
-export const Docx = props => {
-    const { filePath } = props
+export const Docx = ({ path }) => {
     const container = useRef(null)
 
     useEffect(() => {
         const createDocx = async () => {
-            const html = await parseToDocx(filePath)
+            const html = await parseToDocx(path)
             container.current && (container.current.innerHTML = html)
         }
         createDocx()
-    }, [filePath])
+    }, [path])
 
     return (
         <div
             className='document-container'
             ref={container}
         >
-            <Loader />
-        </div>)
+            <Loader/>
+        </div>
+    )
 }

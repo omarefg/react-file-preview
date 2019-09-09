@@ -9,17 +9,19 @@ export const PdfPage = props => {
         const fetchAndRenderPage = async () => {
             const page = await pdf.getPage(index)
             const pageConfig = { page, containerWidth, zoom, canvas }
-            renderPage(pageConfig)
+            const { viewport } = renderPage(pageConfig)
+            const { width, height } = viewport
+
+            canvas.current && (canvas.current.width = width)
+            canvas.current && (canvas.current.height = height)
         }
         fetchAndRenderPage()
-    }, [zoom, index, pdf, containerWidth])
+    }, [zoom, index, pdf, containerWidth, canvas])
 
     return (
         <div>
             <canvas
                 ref={canvas}
-                width='670'
-                height='870'
             />
         </div>
     )

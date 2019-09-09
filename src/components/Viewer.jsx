@@ -1,29 +1,42 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-    PhotoWrapper,
-    Pdf,
-    Docx,
-    Audio,
-    Video,
-    Unssuported,
-    Csv,
-    Xlsx
-} from './'
+import { PhotoWrapper } from './PhotoWrapper'
+import { Pdf } from './Pdf'
+import { Docx } from './Docx'
+import { Audio } from './Audio'
+import { Video } from './Video'
+import { Unssuported } from './Unsupported'
+import { Csv } from './Csv'
+import { Xlsx } from './Xlsx'
 
 export const Viewer = props => {
-    switch (props.fileType) {
+    const {
+        type,
+        path,
+        height,
+        width,
+        onGridSort,
+        UnssuportedComponent,
+        ErrorComponent,
+        style,
+    } = props
+
+    switch (type) {
     case 'csv': {
         return (
             <Csv
-                {...props}
+                path={path}
+                height={height}
+                onGridSort={onGridSort}
             />
         )
     }
     case 'xlsx': {
         return (
             <Xlsx
-                {...props}
+                path={path}
+                height={height}
+                onGridSort={onGridSort}
                 responseType='arraybuffer'
             />
         )
@@ -33,37 +46,81 @@ export const Viewer = props => {
     case 'gif':
     case 'bmp':
     case 'png': {
-        return <PhotoWrapper {...props}/>
+        return (
+            <PhotoWrapper
+                path={path}
+                type={type}
+                width={width}
+                height={height}
+                style={style}
+            />
+        )
     }
     case 'pdf': {
-        return <Pdf {...props}/>
+        return (
+            <Pdf
+                path={path}
+            />
+        )
     }
     case 'docx': {
-        return <Docx {...props}/>
+        return (
+            <Docx
+                path={path}
+            />
+        )
     }
     case 'mp3': {
-        return <Audio {...props}/>
+        return (
+            <Audio
+                path={path}
+            />
+        )
     }
     case 'webm':
     case 'mp4': {
-        return <Video {...props}/>
+        return (
+            <Video
+                path={path}
+                type={type}
+            />
+        )
     }
     default: {
-        return <Unssuported {...props}/>
+        if (ErrorComponent) {
+            return (
+                <ErrorComponent
+                    ErrorComponent={ErrorComponent}
+                />
+            )
+        }
+        return (
+            <Unssuported
+                UnssuportedComponent={UnssuportedComponent}
+            />
+        )
     }
     }
 }
 
 Viewer.propTypes = {
-    fileType: PropTypes.string.isRequired,
-    filePath: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
     onError: PropTypes.func,
-    errorComponent: PropTypes.element,
-    unsupportedComponent: PropTypes.element
+    ErrorComponent: PropTypes.element,
+    UnssuportedComponent: PropTypes.element,
+    onGridSort: PropTypes.func,
+    height: PropTypes.string,
+    width: PropTypes.string,
+    style: PropTypes.object,
 }
 
 Viewer.defaultProps = {
     onError: () => null,
-    errorComponent: null,
-    unsupportedComponent: null
+    ErrorComponent: null,
+    UnsupportedComponent: null,
+    onGridSort: () => null,
+    height: null,
+    width: null,
+    style: null,
 }

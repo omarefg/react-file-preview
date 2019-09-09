@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { Csv, Loader } from '.'
-import { parseToXlsx, getDataForSheet } from '../utils'
+import { Csv } from './Csv'
+import { Loader } from './Loader'
+import { parseToXlsx, getSpreadSheetData } from '../utils'
 
 export const Xlsx = props => {
     const [state, setState] = useState({ sheets: [], names: [], curSheetIndex: 0, isLoading: true })
     const { sheets, names, curSheetIndex, isLoading } = state
-    const { filePath, responseType } = props
+    const { path, responseType, height, onGridSort } = props
 
     useEffect(() => {
         const createSheet = async () => {
-            const data = await getDataForSheet(filePath, responseType)
+            const data = await getSpreadSheetData(path, responseType)
             setState(parseToXlsx(data))
         }
         createSheet()
-    }, [filePath, responseType])
+    }, [path, responseType])
 
     const renderSheetNames = names => {
         const sheets = names.map((name, index) => (
@@ -35,8 +36,11 @@ export const Xlsx = props => {
     const renderSheetData = sheet => {
         return (
             <Csv
-                {...props}
+                path={path}
+                height={height}
+                onGridSort={onGridSort}
                 data={sheet}
+                responseType={responseType}
             />
         )
     }
