@@ -12,7 +12,8 @@ const output = env === 'dev' ? {
 } : {
     path: path.resolve(__dirname, 'lib'),
     filename: 'index.js',
-    libraryTarget: 'commonjs2',
+    library: ['FilePreview'],
+    libraryTarget: 'umd',
 }
 
 const plugins = env === 'dev' ? [
@@ -20,33 +21,55 @@ const plugins = env === 'dev' ? [
         template: path.resolve(__dirname, './example/index.html'),
         filename: './index.html',
     }),
-    new MiniCssExtractPlugin({
-        filename: './[name].[hash].css',
-    }),
-] : [
-    new MiniCssExtractPlugin({
-        filename: './[name].[hash].css',
-    }),
+    new MiniCssExtractPlugin({ filename: './[name].[hash].css' }),
+] : [new MiniCssExtractPlugin({ filename: './[name].[hash].css' })]
+
+const jsJsxRule = env === 'dev' ? {
+    test: /\.(js|jsx)$/,
+    exclude: '/node_modules/',
+    use: {
+        loader: 'babel-loader',
+    },
+} : {
+    test: /\.(js|jsx)$/,
+    exclude: '/node_modules/',
+    include: path.resolve(__dirname, './src'),
+    loader: 'babel-loader',
+    options: {
+        cacheDirectory: true,
+    },
+}
+
+const externals = env === 'dev' ? [] : [
+    {
+        react: {
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react',
+            amd: 'react',
+        },
+    },
+    {
+        'react-dom': {
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom',
+            amd: 'react-dom',
+        },
+    },
 ]
 
 module.exports = {
     entry: env === 'dev' ? path.resolve(__dirname, './example/index.js') : path.resolve(__dirname, './src/index.js'),
     output,
-    devServer: {
-        port: 3600,
-    },
+    devServer: { port: 3600 },
     resolve: {
         extensions: ['.js', '.jsx'],
     },
+    externals,
     module: {
         rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                },
-            },
+            jsJsxRule,
             {
                 test: /\.html$/,
                 use: {

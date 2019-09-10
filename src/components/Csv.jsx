@@ -3,7 +3,6 @@ import ReactTable from 'react-table'
 import { useCsvData } from '../hooks'
 import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
-import { CsvStyles } from '../styles/Csv'
 
 import 'react-table/react-table.css'
 
