@@ -9,10 +9,16 @@ import csv from './samples/sample.csv'
 import xlsx from './samples/sample.xlsx'
 import mp3 from './samples/sample.mp3'
 import mp4 from './samples/sample.mp4'
+import png from './samples/sample.png'
 
 export const App = () => {
     return (
         <div>
+            <h1>PNG</h1>
+            <Viewer
+                type='png'
+                path={png}
+            />
             <h1>JPG</h1>
             <Viewer
                 type='jpg'

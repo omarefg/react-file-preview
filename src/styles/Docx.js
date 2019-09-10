@@ -49,7 +49,7 @@ export const DocxStyles = styled.div`
         display: table
     }
     img {
-        width: 100%
+        width: auto
     }
     tr {
         display: table-row
