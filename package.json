@@ -1,12 +1,13 @@
 {
   "name": "@omarefg/react-file-preview",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Component to render and preview some kind of documents",
   "main": "lib/index.js",
   "private": false,
   "scripts": {
     "start": "ENVIRONMENT=dev webpack-dev-server --mode development",
-    "build": "rm -rf ./lib && ENVIRONMENT=prod webpack --mode production"
+    "build": "rm -rf ./lib && ENVIRONMENT=prod webpack --mode production",
+    "publish": "npm publish --access=public"
   },
   "keywords": [
     "react",
@@ -63,7 +64,7 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.6.1",
-    "babel-eslint": "^10.0.3",
+    "babel-eslint": "10.0.1",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "eslint": "^6.3.0",
