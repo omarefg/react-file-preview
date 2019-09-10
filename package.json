@@ -7,7 +7,7 @@
   "scripts": {
     "start": "ENVIRONMENT=dev webpack-dev-server --mode development",
     "build": "rm -rf ./lib && ENVIRONMENT=prod webpack --mode production",
-    "publish": "npm run build && npm publish --access=public",
+    "publish": "npm publish --access=public",
     "transpile": "NODE_ENV=production && rm -rf ./lib && mkdir lib && npx babel src/ --out-dir lib --copy-files"
   },
   "keywords": [
