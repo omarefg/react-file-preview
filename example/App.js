@@ -1,5 +1,5 @@
 import React from 'react'
-import { Viewer } from './components'
+import { Viewer } from '../src/components'
 
 import jpg from './samples/sample.jpeg'
 import jpg360 from './samples/sample360.jpg'

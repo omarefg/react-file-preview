@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "private": false,
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "start": "ENVIRONMENT=dev webpack-dev-server --mode development",
+    "build": "ENVIRONMENT=prod webpack --mode production"
   },
   "keywords": [
     "react",
@@ -46,6 +46,7 @@
     "xlsx": "^0.15.1"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
