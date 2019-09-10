@@ -1,13 +1,14 @@
 {
   "name": "@omarefg/react-file-preview",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Component to render and preview some kind of documents",
   "main": "lib/index.js",
   "private": false,
   "scripts": {
     "start": "ENVIRONMENT=dev webpack-dev-server --mode development",
     "build": "rm -rf ./lib && ENVIRONMENT=prod webpack --mode production",
-    "publish": "npm run build && npm publish --access=public"
+    "publish": "npm run build && npm publish --access=public",
+    "transpile": "NODE_ENV=production && rm -rf ./lib && mkdir lib && npx babel src/ --out-dir lib --copy-files"
   },
   "keywords": [
     "react",
