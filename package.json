@@ -1,42 +1,14 @@
 {
   "name": "@omarefg/react-file-preview",
-  "version": "0.1.0",
+  "version": "0.1.8",
   "description": "Component to render and preview some kind of documents",
+  "main": "lib/index.js",
   "private": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/omarefg/react-file-preview.git"
-  },
-  "author": "Omar Flores Grimontt <omarefg92@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/omarefg/react-file-preview/issues"
-  },
-  "homepage": "https://github.com/omarefg/react-file-preview#readme",
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.22",
-    "@fortawesome/free-solid-svg-icons": "^5.10.2",
-    "@fortawesome/react-fontawesome": "^0.1.4",
-    "axios": "^0.19.0",
-    "comma-separated-values": "^3.6.4",
-    "mammoth": "^1.4.8",
-    "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-pdf": "^4.1.0",
-    "react-scripts": "3.1.1",
-    "react-table": "^6.10.3",
-    "styled-components": "^4.3.2",
-    "three": "^0.108.0",
-    "xlsx": "^0.15.1"
-  },
   "scripts": {
-    "start": "PORT=54321 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "ENVIRONMENT=dev webpack-dev-server --mode development",
+    "build": "rm -rf ./lib && ENVIRONMENT=prod webpack --mode production",
+    "publish": "npm publish --access=public",
+    "transpile": "NODE_ENV=production && rm -rf ./lib && mkdir lib && npx babel src/ --out-dir lib --copy-files"
   },
   "keywords": [
     "react",
@@ -46,15 +18,69 @@
     "files view",
     "view",
     "viewer",
-    "files viewer"
+    "files viewer",
+    "react-file-viewer"
   ],
-  "babel": {
-    "presets": [
-      "@babel/react"
-    ]
+  "author": "Omar Flores Grimontt <omarefg92@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omarefg/react-file-preview.git"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "bugs": {
+    "url": "https://github.com/omarefg/react-file-preview/issues"
+  },
+  "homepage": "https://github.com/omarefg/react-file-preview#readme",
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "prop-types": "^15.7.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "axios": "^0.19.0",
+    "comma-separated-values": "^3.6.4",
+    "node-sass": "^4.12.0",
+    "mammoth": "^1.4.8",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-pdf": "^4.1.0",
+    "react-table": "^6.10.3",
+    "styled-components": "^4.3.2",
+    "three": "^0.108.0",
+    "xlsx": "^0.15.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.6.1",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.3.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "file-loader": "^4.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
   },
   "browserslist": {
     "production": [
@@ -67,14 +93,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint": "^6.3.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "node-sass": "^4.12.0"
   }
 }
