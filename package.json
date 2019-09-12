@@ -1,6 +1,6 @@
 {
   "name": "@omarefg/react-file-preview",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Component to render and preview some kind of documents",
   "main": "lib/index.js",
   "private": false,

@@ -20,6 +20,7 @@ export const PdfMenu = props => {
         increasePage,
         print,
         page,
+        onPrint,
     } = props
 
     return (
@@ -71,7 +72,7 @@ export const PdfMenu = props => {
                 <FontAwesomeIcon icon={faChevronRight}/>
             </button>
             <button
-                onClick={print}
+                onClick={onPrint || print}
                 type='button'
                 className={styles.button}
                 title='Print'

@@ -22,6 +22,7 @@ export const Viewer = props => {
         onError,
         pageSize,
         showPdfMenu,
+        onPrint,
     } = props
 
     switch (type) {
@@ -75,6 +76,7 @@ export const Viewer = props => {
                 onError={onError}
                 showPdfMenu={showPdfMenu}
                 style={style}
+                onPrint={onPrint}
             />
         )
     }
@@ -117,6 +119,7 @@ export const Viewer = props => {
                 ErrorComponent={ErrorComponent}
                 onError={onError}
                 style={style}
+                type={type}
             />
         )
     }
@@ -136,17 +139,19 @@ Viewer.propTypes = {
     style: object,
     reactTableProps: object,
     showPdfMenu: bool,
+    onPrint: func,
+    className: string,
 }
 
 Viewer.defaultProps = {
     onError: () => null,
     ErrorComponent: null,
     UnsupportedComponent: null,
-    reactTableProps: {
-        onGridSort: () => null,
-    },
+    reactTableProps: { },
     height: null,
     width: null,
     style: null,
     showPdfMenu: true,
+    onPrint: null,
+    className: null,
 }
