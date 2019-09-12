@@ -50,6 +50,7 @@ export const DocxStyles = styled.div`
     }
     img {
         width: auto
+        max-width: 100%
     }
     tr {
         display: table-row
