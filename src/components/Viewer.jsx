@@ -8,6 +8,7 @@ import { Video } from './Video'
 import { Unssuported } from './Unsupported'
 import { Csv } from './Csv'
 import { Xlsx } from './Xlsx'
+import { Loader } from './Loader'
 
 export const Viewer = props => {
     const {
@@ -23,7 +24,17 @@ export const Viewer = props => {
         pageSize,
         showPdfMenu,
         onPrint,
+        isLoading,
     } = props
+
+    if (isLoading) {
+        return (
+            <Loader
+                ErrorComponent={ErrorComponent}
+                onError={onError}
+            />
+        )
+    }
 
     switch (type) {
     case 'csv': {
@@ -141,6 +152,7 @@ Viewer.propTypes = {
     showPdfMenu: bool,
     onPrint: func,
     className: string,
+    isLoading: bool,
 }
 
 Viewer.defaultProps = {
@@ -154,4 +166,5 @@ Viewer.defaultProps = {
     showPdfMenu: true,
     onPrint: null,
     className: null,
+    isLoading: false,
 }
