@@ -25,6 +25,7 @@ export const Viewer = props => {
         showPdfMenu,
         onPrint,
         isLoading,
+        supportXlsx,
     } = props
 
     if (isLoading) {
@@ -50,17 +51,29 @@ export const Viewer = props => {
         )
     }
     case 'xlsx': {
+        if (supportXlsx) {
+            return (
+                <Xlsx
+                    path={path}
+                    height={height}
+                    reactTableProps={reactTableProps}
+                    responseType='arraybuffer'
+                    ErrorComponent={ErrorComponent}
+                    onError={onError}
+                    pageSize={pageSize}
+                />
+            )
+        }
         return (
-            <Xlsx
-                path={path}
-                height={height}
-                reactTableProps={reactTableProps}
-                responseType='arraybuffer'
+            <Unssuported
+                UnssuportedComponent={UnssuportedComponent}
                 ErrorComponent={ErrorComponent}
                 onError={onError}
-                pageSize={pageSize}
+                style={style}
+                type={type}
             />
         )
+
     }
     case 'jpg':
     case 'jpeg':
@@ -153,6 +166,7 @@ Viewer.propTypes = {
     onPrint: func,
     className: string,
     isLoading: bool,
+    supportXlsx: bool,
 }
 
 Viewer.defaultProps = {
@@ -167,4 +181,5 @@ Viewer.defaultProps = {
     onPrint: null,
     className: null,
     isLoading: false,
+    supportXlsx: false,
 }
