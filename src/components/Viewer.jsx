@@ -26,6 +26,9 @@ export const Viewer = props => {
         onPrint,
         isLoading,
         supportXlsx,
+        allowDownload,
+        allowPrint,
+        onDownload,
     } = props
 
     if (isLoading) {
@@ -101,6 +104,9 @@ export const Viewer = props => {
                 showPdfMenu={showPdfMenu}
                 style={style}
                 onPrint={onPrint}
+                allowDownload={allowDownload}
+                allowPrint={allowPrint}
+                onDownload={onDownload}
             />
         )
     }
@@ -167,6 +173,9 @@ Viewer.propTypes = {
     className: string,
     isLoading: bool,
     supportXlsx: bool,
+    allowPrint: bool,
+    allowDownload: bool,
+    onDownload: func,
 }
 
 Viewer.defaultProps = {
@@ -182,4 +191,7 @@ Viewer.defaultProps = {
     className: null,
     isLoading: false,
     supportXlsx: false,
+    allowPrint: false,
+    allowDownload: false,
+    onDownload: null,
 }

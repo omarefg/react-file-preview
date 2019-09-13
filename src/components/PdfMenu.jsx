@@ -7,6 +7,7 @@ import {
     faChevronLeft,
     faChevronRight,
     faPrint,
+    faDownload,
 } from '@fortawesome/free-solid-svg-icons'
 
 import styles from '../styles/PdfMenu.module.scss'
@@ -21,7 +22,13 @@ export const PdfMenu = props => {
         print,
         page,
         onPrint,
+        pdf,
+        allowPrint,
+        allowDownload,
+        onDownload,
     } = props
+
+    const printHandler = () => (onPrint ? onPrint(pdf) : print())
 
     return (
         <div className={styles['buttons-container']}>
@@ -71,14 +78,26 @@ export const PdfMenu = props => {
             >
                 <FontAwesomeIcon icon={faChevronRight}/>
             </button>
-            <button
-                onClick={onPrint || print}
-                type='button'
-                className={styles.button}
-                title='Print'
-            >
-                <FontAwesomeIcon icon={faPrint}/>
-            </button>
+            {allowPrint && (
+                <button
+                    onClick={printHandler}
+                    type='button'
+                    className={styles.button}
+                    title='Print'
+                >
+                    <FontAwesomeIcon icon={faPrint}/>
+                </button>
+            )}
+            {allowDownload && (
+                <button
+                    onClick={onDownload}
+                    type='button'
+                    className={styles.button}
+                    title='Download'
+                >
+                    <FontAwesomeIcon icon={faDownload}/>
+                </button>
+            )}
         </div>
     )
 }

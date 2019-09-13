@@ -6,7 +6,7 @@ import { ErrorBoundary } from './ErrorBoundary'
 import { PdfMenu } from './PdfMenu'
 import { INCREASE_PERCENTAGE } from '../utils'
 
-export const Pdf = ({ path, ErrorComponent, onError, showPdfMenu, style, onPrint }) => {
+export const Pdf = ({ path, ErrorComponent, onError, showPdfMenu, style, onPrint, allowPrint, allowDownload, onDownload }) => {
     const {
         state,
         container,
@@ -39,6 +39,10 @@ export const Pdf = ({ path, ErrorComponent, onError, showPdfMenu, style, onPrint
                             print={print}
                             page={page}
                             onPrint={onPrint}
+                            pdf={pdf}
+                            allowDownload={allowDownload}
+                            allowPrint={allowPrint}
+                            onDownload={onDownload}
                         />
                     )}
                     {!pdf && (
