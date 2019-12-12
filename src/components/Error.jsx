@@ -1,12 +1,14 @@
 import React from 'react'
-import styles from '../styles/Error.module.scss'
+import { ErrorStyles } from '../styles/Error'
 
 export const Error = ({ ErrorComponent }) => {
     return (
-        <div className={styles.container}>
-            {ErrorComponent ?
-                <ErrorComponent/> :
-                <p className={styles.alert}>Unable to preview file</p>}
-        </div>
+        <ErrorStyles>
+            <div className='container'>
+                {ErrorComponent ?
+                    <ErrorComponent/> :
+                    <p className='alert'>Unable to preview file</p>}
+            </div>
+        </ErrorStyles>
     )
 }

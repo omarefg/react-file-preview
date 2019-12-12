@@ -4,7 +4,7 @@ import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
 import { useXlsxData } from '../hooks'
 
-import styles from '../styles/Xlsx.module.scss'
+import { XlsxStyles } from '../styles/Xlsx'
 
 export const Xlsx = props => {
     const { state, setState } = useXlsxData(props)
@@ -25,25 +25,27 @@ export const Xlsx = props => {
             ErrorComponent={ErrorComponent}
             onError={onError}
         >
-            <div>
-                <div className={styles.names}>
-                    {names.map((name, curSheetIndex) => {
-                        return (
-                            <input
-                                className={styles.name}
-                                key={name}
-                                type='button'
-                                value={name}
-                                onClick={() => setState({ ...state, curSheetIndex })}
-                            />
-                        )
-                    })}
+            <XlsxStyles>
+                <div>
+                    <div className={styles.names}>
+                        {names.map((name, curSheetIndex) => {
+                            return (
+                                <input
+                                    className={styles.name}
+                                    key={name}
+                                    type='button'
+                                    value={name}
+                                    onClick={() => setState({ ...state, curSheetIndex })}
+                                />
+                            )
+                        })}
+                    </div>
+                    <Csv
+                        reactTableProps={reactTableProps}
+                        data={sheets[curSheetIndex || 0]}
+                    />
                 </div>
-                <Csv
-                    reactTableProps={reactTableProps}
-                    data={sheets[curSheetIndex || 0]}
-                />
-            </div>
+            </XlsxStyles>
         </ErrorBoundary>
     )
 }

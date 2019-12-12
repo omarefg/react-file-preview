@@ -1,6 +1,6 @@
 import React from 'react'
 import { ErrorBoundary } from './ErrorBoundary'
-import styles from '../styles/Loader.module.scss'
+import { LoaderStyles } from '../styles/Loader'
 
 export const Loader = ({ ErrorComponent, onError }) => {
     return (
@@ -8,9 +8,11 @@ export const Loader = ({ ErrorComponent, onError }) => {
             ErrorComponent={ErrorComponent}
             onError={onError}
         >
-            <div className={styles.container}>
-                <span className={styles.loader}/>
-            </div>
+            <LoaderStyles>
+                <div className='container'>
+                    <span className='loader'/>
+                </div>
+            </LoaderStyles>
         </ErrorBoundary>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
 
-import styles from '../styles/Audio.module.scss'
+import { AudioStyles } from '../styles/Audio'
 
 export const Audio = ({ path, ErrorComponent, onError, style }) => {
     const [loading, setLoader] = useState(true)
@@ -14,23 +14,25 @@ export const Audio = ({ path, ErrorComponent, onError, style }) => {
             ErrorComponent={ErrorComponent}
             onError={onError}
         >
-            <div>
-                {loading && (
-                    <Loader
-                        ErrorComponent={ErrorComponent}
-                        onError={onError}
-                    />
-                )}
-                <audio
-                    className={styles.audio}
-                    style={{ ...style, visibility }}
-                    controls
-                    onCanPlay={onCanPlay}
-                    src={path}
-                >
+            <AudioStyles>
+                <div>
+                    {loading && (
+                        <Loader
+                            ErrorComponent={ErrorComponent}
+                            onError={onError}
+                        />
+                    )}
+                    <audio
+                        className='audio'
+                        style={{ ...style, visibility }}
+                        controls
+                        onCanPlay={onCanPlay}
+                        src={path}
+                    >
                         Video playback is not supported by your browser.
-                </audio>
-            </div>
+                    </audio>
+                </div>
+            </AudioStyles>
         </ErrorBoundary>
     )
 }

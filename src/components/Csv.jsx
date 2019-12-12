@@ -4,7 +4,7 @@ import { useCsvData } from '../hooks'
 import { Loader } from './Loader'
 import { ErrorBoundary } from './ErrorBoundary'
 
-import 'react-table/react-table.css'
+import { CsvStyles } from '../styles/Csv'
 
 export const Csv = props => {
     const state = useCsvData(props)
@@ -25,12 +25,14 @@ export const Csv = props => {
             ErrorComponent={ErrorComponent}
             onError={onError}
         >
-            <ReactTable
-                columns={columns}
-                data={rows}
-                defaultPageSize={10}
-                {...reactTableProps}
-            />
+            <CsvStyles>
+                <ReactTable
+                    columns={columns}
+                    data={rows}
+                    defaultPageSize={10}
+                    {...reactTableProps}
+                />
+            </CsvStyles>
         </ErrorBoundary>
     )
 }

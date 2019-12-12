@@ -10,7 +10,7 @@ import {
     faDownload,
 } from '@fortawesome/free-solid-svg-icons'
 
-import styles from '../styles/PdfMenu.module.scss'
+import { PdfMenuStyles } from '../styles/PdfMenu'
 
 export const PdfMenu = props => {
     const {
@@ -31,73 +31,75 @@ export const PdfMenu = props => {
     const printHandler = () => (onPrint ? onPrint(pdf) : print())
 
     return (
-        <div className={styles['buttons-container']}>
-            <button
-                onClick={increaseZoom}
-                type='button'
-                className={styles.button}
-                title='Zoom In'
-            >
-                <FontAwesomeIcon icon={faSearchPlus}/>
-            </button>
-            <button
-                onClick={resetZoom}
-                type='button'
-                className={styles.button}
-                title='Restart Zoom'
-            >
-                <FontAwesomeIcon icon={faUndoAlt}/>
-            </button>
-            <button
-                onClick={reduceZoom}
-                type='button'
-                className={styles.button}
-                title='Zoom Out'
-            >
-                <FontAwesomeIcon icon={faSearchMinus}/>
-            </button>
-            <button
-                onClick={reducePage}
-                type='button'
-                className={styles.button}
-                title='Previous Page'
-            >
-                <FontAwesomeIcon icon={faChevronLeft}/>
-            </button>
-            <input
-                className={styles.input}
-                type='number'
-                value={page}
-                disabled
-            />
-            <button
-                onClick={increasePage}
-                type='button'
-                className={styles.button}
-                title='Next Page'
-            >
-                <FontAwesomeIcon icon={faChevronRight}/>
-            </button>
-            {allowPrint && (
+        <PdfMenuStyles>
+            <div className='buttons-container'>
                 <button
-                    onClick={printHandler}
+                    onClick={increaseZoom}
                     type='button'
-                    className={styles.button}
-                    title='Print'
+                    className='button'
+                    title='Zoom In'
                 >
-                    <FontAwesomeIcon icon={faPrint}/>
+                    <FontAwesomeIcon icon={faSearchPlus}/>
                 </button>
-            )}
-            {allowDownload && (
                 <button
-                    onClick={onDownload}
+                    onClick={resetZoom}
                     type='button'
-                    className={styles.button}
-                    title='Download'
+                    className='button'
+                    title='Restart Zoom'
                 >
-                    <FontAwesomeIcon icon={faDownload}/>
+                    <FontAwesomeIcon icon={faUndoAlt}/>
                 </button>
-            )}
-        </div>
+                <button
+                    onClick={reduceZoom}
+                    type='button'
+                    className='button'
+                    title='Zoom Out'
+                >
+                    <FontAwesomeIcon icon={faSearchMinus}/>
+                </button>
+                <button
+                    onClick={reducePage}
+                    type='button'
+                    className='button'
+                    title='Previous Page'
+                >
+                    <FontAwesomeIcon icon={faChevronLeft}/>
+                </button>
+                <input
+                    className='input'
+                    type='number'
+                    value={page}
+                    disabled
+                />
+                <button
+                    onClick={increasePage}
+                    type='button'
+                    className='button'
+                    title='Next Page'
+                >
+                    <FontAwesomeIcon icon={faChevronRight}/>
+                </button>
+                {allowPrint && (
+                    <button
+                        onClick={printHandler}
+                        type='button'
+                        className='button'
+                        title='Print'
+                    >
+                        <FontAwesomeIcon icon={faPrint}/>
+                    </button>
+                )}
+                {allowDownload && (
+                    <button
+                        onClick={onDownload}
+                        type='button'
+                        className='button'
+                        title='Download'
+                    >
+                        <FontAwesomeIcon icon={faDownload}/>
+                    </button>
+                )}
+            </div>
+        </PdfMenuStyles>
     )
 }
