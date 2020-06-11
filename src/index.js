@@ -1,3 +1,5 @@
 import { Viewer } from './components'
 
-export default Viewer
+const viewer = typeof window !== 'undefined' ? Viewer : null
+
+export default viewer
