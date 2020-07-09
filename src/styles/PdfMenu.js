@@ -6,6 +6,8 @@ export const PdfMenuStyles = styled.span`
         margin: 10px 0;
         display: flex;
         justify-content: center;
+        position: sticky;
+        top: 10px;
     }
 
     .button {
